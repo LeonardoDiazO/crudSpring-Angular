@@ -30,7 +30,7 @@ public class BookController {
         }
     }
 
-    @PutMapping("/{id}/img")
+    @PutMapping("/{id}/image")
     public ResponseEntity<Book> updateBookImg(@PathVariable Long id, @RequestPart("file")MultipartFile file) throws IOException {
         Optional<Book> book = bookServiceImpl.getBookById(id);
 
