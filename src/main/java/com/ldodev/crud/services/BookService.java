@@ -1,13 +1,15 @@
 package com.ldodev.crud.services;
 
 import com.ldodev.crud.entities.Book;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 public interface BookService {
 
-    Book saveBook(Book book);
+    Book saveBook(Book book, MultipartFile file)throws IOException;
 
     Book updateBook(Book book);
 
@@ -16,4 +18,6 @@ public interface BookService {
     Optional<Book> getBookById(Long id);
 
     void deleteBook(Long id);
+
+    Book updateBookImg (MultipartFile file, Book book)throws IOException;
 }
