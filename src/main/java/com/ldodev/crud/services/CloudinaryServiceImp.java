@@ -19,9 +19,9 @@ public class CloudinaryServiceImp implements CloudinaryService {
 
     public CloudinaryServiceImp() {
         Map<String, String> valuesMap = new HashMap<>();
-        valuesMap.put("cloud_name", "");
-        valuesMap.put("api_key", "");
-        valuesMap.put("api_secret", "");
+        valuesMap.put("cloud_name", "dpnhld2ew");
+        valuesMap.put("api_key", "679163435773483");
+        valuesMap.put("api_secret", "o_DujW-BG2a5R59GlZMSFiG0MgE");
         this.cloudinary = new Cloudinary(valuesMap);
     }
 

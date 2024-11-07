@@ -47,8 +47,11 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public void deleteBook(Long id){
-        bookRepository.deleteById(id);
+    public void deleteBook(Book book)throws IOException{
+        if(book.getImage() != null){
+            imageService.deleteImage(book.getImage());
+        }
+        bookRepository.deleteById(book.getId());
     }
 
     @Override

@@ -21,7 +21,7 @@ public class BookController {
     BookServiceImpl bookServiceImpl;
 
     @PostMapping
-    public ResponseEntity<Book> saveBook(@RequestPart("book") Book book, @RequestPart("file")MultipartFile file) throws IOException{
+    public ResponseEntity<Book> saveBook(@RequestPart("book") Book book, @RequestPart("file") MultipartFile file) throws IOException {
         try {
             Book saveBook = bookServiceImpl.saveBook(book, file);
             return new ResponseEntity<>(saveBook, HttpStatus.OK);
@@ -67,10 +67,10 @@ public class BookController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Book> deleteBook(@PathVariable Long id){
+    public ResponseEntity<Book> deleteBook(@PathVariable Long id) throws IOException {
         Optional<Book> book = bookServiceImpl.getBookById(id);
         if (book.isPresent()){
-            bookServiceImpl.deleteBook(book.get().getId());
+            bookServiceImpl.deleteBook(book.get());
             return new ResponseEntity<>(HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
