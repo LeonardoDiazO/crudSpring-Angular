@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,12 +21,24 @@ public class BookController {
     BookServiceImpl bookServiceImpl;
 
     @PostMapping
-    public ResponseEntity<Book> saveBook(@RequestBody Book book){
+    public ResponseEntity<Book> saveBook(@RequestPart("book") Book book, @RequestPart("file")MultipartFile file) throws IOException{
         try {
-            Book saveBook = bookServiceImpl.saveBook(book);
+            Book saveBook = bookServiceImpl.saveBook(book, file);
             return new ResponseEntity<>(saveBook, HttpStatus.OK);
         }catch (Exception e){
             return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/{id}/img")
+    public ResponseEntity<Book> updateBookImg(@PathVariable Long id, @RequestPart("file")MultipartFile file) throws IOException {
+        Optional<Book> book = bookServiceImpl.getBookById(id);
+
+        if(book.isPresent()){
+            Book updatedBook = bookServiceImpl.updateBookImg(file, book.get());
+            return new ResponseEntity<>(updatedBook, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
